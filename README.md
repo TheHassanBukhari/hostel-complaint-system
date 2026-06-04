@@ -63,8 +63,8 @@ python Project.py
 
 ## Additional Resources
 
-For a **detailed explanation of the code, logic, and implementation**, visit my blog post:
-[Full Blog Post Explanation](https://hassan-codes.blogspot.com/2025/08/hostel-complaint-system-1st-semester.html)
+For a **detailed explanation of the code, logic, and implementation**, visit my documentation:
+[Full Project Explanation](https://thehassanbukhari.github.io/hostel-complaint-system/)
 
 ---
 
