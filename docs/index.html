@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hostel Complaints System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Fraunces:opsz,wght@9..144,300;9..144,600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f0ed;
+  --border: #e2e2dc;
+  --border2: #d0d0c8;
+  --text: #2a2a28;
+  --muted: #7a7a72;
+  --accent: #1a6b3c;
+  --accent-dim: #eaf4ef;
+  --accent-border: #b6d9c5;
+  --accent2: #1a4f8a;
+  --accent2-dim: #eaf0f8;
+  --accent2-border: #b6cfe5;
+  --code-bg: #1e1e1e;
+  --code-text: #d4d4d4;
+  --code-green: #4ec9b0;
+  --code-blue: #569cd6;
+  --code-yellow: #dcdcaa;
+  --code-orange: #ce9178;
+  --code-comment: #6a9955;
+  --code-type: #4fc1ff;
+  --heading: #1a1a18;
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Fraunces', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem;
+}
+
+.hero {
+  padding: 3.5rem 0 2.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  border-radius: 4px;
+  padding: 3px 10px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  color: var(--heading);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.hero-desc {
+  font-size: 16.5px;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-dim);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.tag.blue {
+  border-color: var(--accent2-border);
+  background: var(--accent2-dim);
+  color: var(--accent2);
+}
+.tag.gray {
+  border-color: var(--border2);
+  background: var(--surface2);
+  color: var(--muted);
+}
+
+.section { margin-bottom: 3rem; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--heading);
+  line-height: 1.25;
+  margin-bottom: 0.85rem;
+}
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin: 1.75rem 0 0.5rem;
+}
+p { margin-bottom: 1rem; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+code {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--accent);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.75rem 0;
+}
+
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+}
+.feat {
+  background: var(--surface);
+  padding: 1.1rem 1.2rem;
+}
+.feat-title {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+.feat-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.code-wrap {
+  background: var(--code-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+  border: 1px solid #333;
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #2a2a2a;
+  border-bottom: 1px solid #333;
+}
+.code-lang {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.copy-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #888;
+  background: none;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.copy-btn:hover { color: #ccc; border-color: #666; }
+.copy-btn.copied { color: #4ec9b0; border-color: #4ec9b0; }
+pre {
+  padding: 1.1rem 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--code-text);
+}
+.kw { color: var(--code-blue); }
+.fn { color: var(--code-yellow); }
+.str { color: var(--code-orange); }
+.num { color: #b5cea8; }
+.tp { color: var(--code-type); }
+.cm { color: var(--code-comment); font-style: italic; }
+
+.callout {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-dim);
+  border-radius: 0 6px 6px 0;
+  padding: 0.85rem 1.1rem;
+  margin: 1.25rem 0;
+  font-size: 14.5px;
+  color: var(--text);
+}
+.callout.blue {
+  border-left-color: var(--accent2);
+  background: var(--accent2-dim);
+}
+.callout strong { color: var(--heading); }
+
+.file-box {
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.1rem 0;
+  background: var(--surface);
+}
+.file-box-header {
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  padding: 0.45rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.fdot { width: 8px; height: 8px; border-radius: 50%; }
+.file-box-body {
+  padding: 0.85rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--accent);
+}
+.file-box-body .fc { color: var(--muted); }
+
+.console {
+  background: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+  border: 1px solid #333;
+}
+.console-bar {
+  background: #2d2d2d;
+  padding: 0.45rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid #333;
+}
+.console-bar span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #666;
+  margin-left: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.cdot { width: 10px; height: 10px; border-radius: 50%; }
+.console-body {
+  padding: 1rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.85;
+  color: #d4d4d4;
+}
+.con-green { color: #4ec9b0; }
+.con-yellow { color: #e5c07b; }
+.con-blue { color: #61afef; }
+.con-dim { color: #666; }
+.con-white { color: #ffffff; font-weight: 600; }
+.con-input { color: #98c379; }
+
+.complaint-preview {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+  max-width: 420px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.complaint-header {
+  background: var(--accent);
+  padding: 1rem 1.5rem;
+  color: white;
+}
+.complaint-header-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.3rem;
+}
+.complaint-id {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.complaint-body {
+  padding: 1.25rem 1.5rem;
+}
+.complaint-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+.complaint-row:last-child { border-bottom: none; }
+.complaint-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  min-width: 95px;
+  font-weight: 500;
+}
+.complaint-value {
+  color: var(--heading);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  flex: 1;
+}
+.complaint-value.multiline {
+  white-space: pre-line;
+}
+
+.category-demo {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.25rem 0;
+  display: inline-block;
+  width: 100%;
+  max-width: 320px;
+}
+.category-item {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  padding: 5px 0;
+  color: var(--text);
+  border-bottom: 1px dotted var(--border);
+}
+.category-item:last-child { border-bottom: none; }
+
+.exec-map {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1.1rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.95;
+  color: #d4d4d4;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  white-space: pre;
+}
+.em-root { color: #4ec9b0; font-weight: 600; }
+.em-fn { color: #61afef; }
+.em-cm { color: #6a9955; font-style: italic; }
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+}
+.edu-title {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+.edu-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--heading);
+}
+.footer-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  border-radius: 6px;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.gh-link:hover { background: #d5ecdf; }
+.gh-link svg { width: 15px; height: 15px; fill: currentColor; }
+
+@media (max-width: 540px) {
+  .hero-title { font-size: 1.75rem; }
+  .complaint-preview { max-width: 100%; }
+  .complaint-row { flex-direction: column; gap: 0.25rem; }
+  .complaint-label { min-width: auto; }
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Project Walkthrough</div>
+    <h1 class="hero-title">Console Based<br/>Hostel Complaints System</h1>
+    <p class="hero-desc">A complete breakdown of how this Python project works: file based persistence, complaint classification, admin moderation, and the logic inside every core function.</p>
+    <div class="meta-row">
+      <span class="tag">Python</span>
+      <span class="tag">Console App</span>
+      <span class="tag blue">File I/O</span>
+      <span class="tag gray">COMSATS Islamabad</span>
+    </div>
+    <p style="font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-top: 1rem;">First semester project: structured file storage without any external database.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Overview</div>
+    <h2>What the program does</h2>
+    <p>Python based complaint management system for hostels. Uses plain text files inside a <code>Data/</code> folder to store everything: individual complaint files, a serial counter, an active index, and a resolved archive. The system survives restarts and requires no setup.</p>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-title">Complaint Submission</div>
+        <div class="feat-desc">Students enter name, room, choose main category + subcategory, and write complaint details.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-title">Categorized Taxonomy</div>
+        <div class="feat-desc">Six main categories: Food, Water, Electricity, Internet, Room Maintenance, Other. Subcategories with custom entry.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-title">Serial Number</div>
+        <div class="feat-desc">Auto incrementing counter stored in <code>serial_counter.txt</code> ensures unique IDs across runs.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-title">Admin Panel</div>
+        <div class="feat-desc">Password protected. View unresolved complaints, see full details, mark resolved, view resolved history.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-title">Dual Storage</div>
+        <div class="feat-desc">Individual complaint files (<code>complaint_N.txt</code>) + index file for quick listing. Resolved moved to archive.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-title">Portable Paths</div>
+        <div class="feat-desc">Uses <code>os.path.join</code> and <code>os.makedirs</code> to work on Windows, Linux, macOS without changes.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 01</div>
+    <h2>File system infrastructure</h2>
+    <p>All data lives inside a <code>Data/</code> folder next to the script. Inside, a <code>complaints/</code> directory holds every complaint as a separate text file. The program creates everything automatically if missing.</p>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">Python</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">import</span> os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.join(script_dir, <span class="str">"Data"</span>)
+complaints_dir = os.path.join(data_dir, <span class="str">"complaints"</span>)
+os.makedirs(complaints_dir, exist_ok=<span class="kw">True</span>)
+
+serial_file = os.path.join(data_dir, <span class="str">"serial_counter.txt"</span>)
+index_file = os.path.join(data_dir, <span class="str">"complaint_index.txt"</span>)
+resolved_file = os.path.join(data_dir, <span class="str">"resolved_complaints.txt"</span>)</pre>
+    </div>
+    <div class="file-box">
+      <div class="file-box-header">
+        <div class="fdot" style="background:#f87171"></div>
+        <div class="fdot" style="background:#fbbf24"></div>
+        <div class="fdot" style="background:#4ade80"></div>
+        Data folder structure
+      </div>
+      <div class="file-box-body">
+        Data/<br/>
+        ├── serial_counter.txt<br/>
+        ├── complaint_index.txt<br/>
+        ├── resolved_complaints.txt<br/>
+        └── complaints/<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── complaint_1.txt<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── complaint_2.txt<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;└── ...
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 02</div>
+    <h2>Serial number generator</h2>
+    <p>Atomic increment operation. Reads the current value, adds one, writes back, and returns the new serial. The <code>r+</code> mode and <code>seek(0)</code> ensure the file is overwritten from the beginning.</p>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">Python</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">def</span> <span class="fn">get_next_serial</span>():
+    <span class="kw">with</span> <span class="fn">open</span>(serial_file, <span class="str">"r+"</span>) <span class="kw">as</span> f:
+        serial = <span class="fn">int</span>(f.<span class="fn">read</span>()) + <span class="num">1</span>
+        f.<span class="fn">seek</span>(<span class="num">0</span>)
+        f.<span class="fn">write</span>(<span class="fn">str</span>(serial))
+    <span class="kw">return</span> serial</pre>
+    </div>
+    <div class="callout">
+      <strong>Why this works:</strong> The file contains only a single integer. Reading consumes the content, moving the pointer to the end. <code>seek(0)</code> moves it back to the start before writing, so we overwrite the old value instead of appending.
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 03</div>
+    <h2>Complaint categories</h2>
+    <p>Six main categories mapped to specific subcategories using a dictionary. Users first pick a main category, then a subcategory from a dynamic list. The "Other" option allows custom subcategory input.</p>
+    <div class="category-demo">
+      <div class="category-item">1. Food Issues</div>
+      <div class="category-item">2. Water Supply</div>
+      <div class="category-item">3. Electricity Problems</div>
+      <div class="category-item">4. Internet Issues</div>
+      <div class="category-item">5. Room Maintenance</div>
+      <div class="category-item">6. Other Complaints</div>
+    </div>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">Python</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre>subcategories = {
+    <span class="str">"Food Issues"</span>: [<span class="str">"Food Quality"</span>, <span class="str">"Meal Timings"</span>, <span class="str">"Canteen Staff Behavior"</span>, <span class="str">"Other"</span>],
+    <span class="str">"Water Supply"</span>: [<span class="str">"Drinking Water Problems"</span>, <span class="str">"Wash Water Issues"</span>, <span class="str">"Other"</span>],
+    <span class="str">"Electricity Problems"</span>: [<span class="str">"Power Outages"</span>, <span class="str">"Voltage Issues"</span>, <span class="str">"Other"</span>],
+    <span class="str">"Internet Issues"</span>: [<span class="str">"No Internet Access"</span>, <span class="str">"Slow Internet Speed"</span>, <span class="str">"Other"</span>],
+    <span class="str">"Room Maintenance"</span>: [<span class="str">"Room Cleaning Required"</span>, <span class="str">"Bathroom Not Cleaned"</span>, <span class="str">"Broken Items"</span>, <span class="str">"Other"</span>],
+    <span class="str">"Other Complaints"</span>: [<span class="str">"User Defined"</span>]
+}</pre>
+    </div>
+    <div class="callout blue">
+      <strong>Dynamic subcategory selection:</strong> After picking a main category, the program displays the matching subcategory list. If "Other" or "User Defined" is selected, it prompts for custom text.
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 04</div>
+    <h2>Submitting a complaint</h2>
+    <p>The submission process collects name, room, category, subcategory, and details. It then generates a serial number, writes a detailed complaint file inside the <code>complaints/</code> directory, and appends a summary line to <code>complaint_index.txt</code>.</p>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">Python — writing complaint file</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre>filename = os.path.join(complaints_dir, <span class="str">f"complaint_{serial}.txt"</span>)
+<span class="kw">with</span> <span class="fn">open</span>(filename, <span class="str">"w"</span>) <span class="kw">as</span> f:
+    f.<span class="fn">write</span>(<span class="str">f"Complaint No: {serial}\n"</span>)
+    f.<span class="fn">write</span>(<span class="str">f"Name: {name}\n"</span>)
+    f.<span class="fn">write</span>(<span class="str">f"Room: {room}\n"</span>)
+    f.<span class="fn">write</span>(<span class="str">f"Main Category: {category}\n"</span>)
+    f.<span class="fn">write</span>(<span class="str">f"Sub Category: {subcategory}\n"</span>)
+    f.<span class="fn">write</span>(<span class="str">f"Complaint: {details}\n"</span>)
+
+<span class="fn">file_append</span>(index_file, <span class="str">f"{serial} | {name} | Room {room} | {category}"</span>)</pre>
+    </div>
+
+    <div class="complaint-preview">
+      <div class="complaint-header">
+        <div class="complaint-header-title">Complaint Record</div>
+        <div class="complaint-id">Complaint No: 7</div>
+      </div>
+      <div class="complaint-body">
+        <div class="complaint-row">
+          <span class="complaint-label">Name</span>
+          <span class="complaint-value">Ahmed Raza</span>
+        </div>
+        <div class="complaint-row">
+          <span class="complaint-label">Room Number</span>
+          <span class="complaint-value">G-22</span>
+        </div>
+        <div class="complaint-row">
+          <span class="complaint-label">Main Category</span>
+          <span class="complaint-value">Water Supply</span>
+        </div>
+        <div class="complaint-row">
+          <span class="complaint-label">Sub Category</span>
+          <span class="complaint-value">Drinking Water Problems</span>
+        </div>
+        <div class="complaint-row">
+          <span class="complaint-label">Details</span>
+          <span class="complaint-value multiline">No water in the third floor coolers since two days. The coolers on floor 3 have been empty despite multiple requests to the maintenance staff.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 05</div>
+    <h2>Admin authentication</h2>
+    <p>Simple hardcoded password check. While not secure for production, it demonstrates a basic access control layer for a console project. The password is stored directly in the function.</p>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">Python</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">def</span> <span class="fn">admin_login</span>():
+    password = <span class="fn">input</span>(<span class="str">"Enter admin password: "</span>)
+    <span class="kw">return</span> password == <span class="str">"admin123"</span></pre>
+    </div>
+    <div class="console">
+      <div class="console-bar">
+        <div class="cdot" style="background:#ff5f56"></div>
+        <div class="cdot" style="background:#ffbd2e"></div>
+        <div class="cdot" style="background:#27c93f"></div>
+        <span>admin login</span>
+      </div>
+      <div class="console-body">
+        <span class="con-yellow">Enter admin password: </span><span class="con-input">admin123</span><br/>
+        <span class="con-green">Access granted.</span><br/>
+        <br/>
+        <span class="con-white">Admin Panel:</span><br/>
+        1. View Current Complaints<br/>
+        2. View Resolved Complaints<br/>
+        3. Logout<br/>
+        <span class="con-yellow">Select an option: </span><span class="con-input">_</span>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 06</div>
+    <h2>Viewing and resolving complaints</h2>
+    <p>The admin reads <code>complaint_index.txt</code> to display all unresolved complaints. Entering a serial number shows the full complaint file and offers to mark it as resolved.</p>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">Python — resolve complaint</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">def</span> <span class="fn">resolve_complaint</span>(serial):
+    <span class="kw">with</span> <span class="fn">open</span>(index_file, <span class="str">"r"</span>) <span class="kw">as</span> f:
+        lines = f.<span class="fn">readlines</span>()
+    new_lines = []
+    resolved_line = <span class="str">""</span>
+    <span class="kw">for</span> line <span class="kw">in</span> lines:
+        <span class="kw">if</span> line.<span class="fn">startswith</span>(<span class="str">f"{serial} "</span>):
+            resolved_line = line
+        <span class="kw">else</span>:
+            new_lines.<span class="fn">append</span>(line)
+    <span class="kw">with</span> <span class="fn">open</span>(index_file, <span class="str">"w"</span>) <span class="kw">as</span> f:
+        f.<span class="fn">writelines</span>(new_lines)
+    <span class="fn">file_append</span>(resolved_file, resolved_line.<span class="fn">strip</span>())</pre>
+    </div>
+    <div class="callout">
+      <strong>Filter pattern:</strong> The function reads the entire index, filters out the line matching the serial (using <code>startswith</code> to avoid partial matches), writes back the remaining lines, and appends the removed line to the resolved archive. The original complaint file stays untouched.
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 07</div>
+    <h2>File formats</h2>
+    <p>Three core text files maintain the system state. Everything is plain text, human readable, and easy to debug.</p>
+    <div class="file-box">
+      <div class="file-box-header"><div class="fdot" style="background:#f87171"></div> Data/serial_counter.txt</div>
+      <div class="file-box-body">7</div>
+    </div>
+    <div class="file-box">
+      <div class="file-box-header"><div class="fdot" style="background:#fbbf24"></div> Data/complaint_index.txt</div>
+      <div class="file-box-body">5 | Ali | Room 104 | Internet Issues<br/>6 | Sara | Room 207 | Electricity Problems</div>
+    </div>
+    <div class="file-box">
+      <div class="file-box-header"><div class="fdot" style="background:#4ade80"></div> Data/resolved_complaints.txt</div>
+      <div class="file-box-body">2 | Bilal | Room 112 | Food Issues<br/>4 | Zain | Room 089 | Room Maintenance</div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 08</div>
+    <h2>Full execution map</h2>
+    <div class="exec-map">
+<span class="em-root">Start</span>
+  └─ <span class="em-fn">main()</span>
+       ├─ create directories and files if missing
+       ├─ <span class="em-fn">while True:</span> main menu
+       │     ├─ 1 → <span class="em-fn">submit_complaint()</span>
+       │     │     ├─ collect name / room
+       │     │     ├─ display categories → pick main
+       │     │     ├─ display subcategories → pick / custom
+       │     │     ├─ collect details
+       │     │     ├─ <span class="em-fn">get_next_serial()</span> (read+write serial_counter.txt)
+       │     │     ├─ write complaint_&lt;serial&gt;.txt
+       │     │     └─ append summary to complaint_index.txt
+       │     ├─ 2 → <span class="em-fn">admin_panel()</span>
+       │     │     ├─ <span class="em-fn">admin_login()</span> (password check)
+       │     │     └─ <span class="em-fn">while True:</span> admin menu
+       │     │           ├─ 1 → <span class="em-fn">view_complaints()</span>
+       │     │           │     ├─ read complaint_index.txt
+       │     │           │     ├─ show list
+       │     │           │     ├─ prompt for serial
+       │     │           │     ├─ show complaint file
+       │     │           │     └─ optionally <span class="em-fn">resolve_complaint()</span>
+       │     │           │           ├─ filter line from index
+       │     │           │           └─ append to resolved_complaints.txt
+       │     │           └─ 2 → <span class="em-fn">view_resolved()</span> (print resolved_complaints.txt)
+       │     └─ 3 → exit
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Section 09</div>
+    <h2>What this teaches</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-title">File I/O fundamentals</div>
+        <div class="edu-desc">Reading, writing, appending, and managing multiple text files as a makeshift database.</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-title">Data structures</div>
+        <div class="edu-desc">Lists for categories, dictionaries for subcategories, and formatted strings for persistence.</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-title">Modular design</div>
+        <div class="edu-desc">Each feature isolated in its own function. The main menu delegates to specific handlers.</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-title">Atomic operations</div>
+        <div class="edu-desc">Using <code>r+</code> and <code>seek</code> to safely increment a counter without race conditions.</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-title">Path abstraction</div>
+        <div class="edu-desc"><code>os.path.join</code> and <code>os.makedirs</code> make the code run anywhere.</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-title">Separation of active / resolved</div>
+        <div class="edu-desc">Moving records between files instead of using deletion flags simplifies queries.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section">
+    <div class="section-label">Closing note</div>
+    <h2>From physical register to digital system</h2>
+    <p>The idea came from our hostel's messy physical complaint register: just a notebook with no organization. I started with an execution map on a page, improving it again and again as I added parts to overcome limitations. When I began coding, if I could not implement something complex, I changed it into a simpler solution that still worked. I built it step by step, using basic tools like lists and text files, until it became a complete system. It taught me that starting with a clear personal idea and adapting as you go turns a concept into a real working program.</p>
+    <p>If you want to extend this project: add timestamps, implement complaint searching, allow students to track status, or convert the file storage to SQLite. The structure is ready for incremental improvement.</p>
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="footer-name">Hassan Bukhari</div>
+      <div class="footer-sub">BS Computer Science, COMSATS University Islamabad</div>
+    </div>
+    <a class="gh-link" href="https://github.com/TheHassanBukhari/hostel-complaint-system" target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .322.216.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      View source on GitHub
+    </a>
+  </div>
+
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-wrap').querySelector('pre');
+  const text = pre.innerText.replace(/\u00A0/g, ' ');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+</script>
+</body>
+</html>
