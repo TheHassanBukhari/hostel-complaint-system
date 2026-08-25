@@ -1,8 +1,8 @@
 # Hostel Complaint System (1st Semester Python Project)
 This repository contains my **first semester Python project**: a **Hostel Complaint Management System**. It is a **console-based application** that allows hostel residents to **submit complaints with categories and details**, while administrators can **review, track, and resolve complaints**. The project demonstrates Python fundamentals such as **functions, file handling, and simple data structures**.
 
-**Portfolio:** [hassanbukhari.is-a.dev](https://hassanbukhari.is-a.dev/)
-
+**Portfolio:** [hassanbukhari.is-a.dev](https://hassanbukhari.is-a.dev/) <br>
+**LinkedIn:** [Syed Hassan Ali Bukhari](https://www.linkedin.com/in/syedhassanalibukhari/)
 
 ## Features
 * **Submit Complaints**: Students can submit complaints with details like name, room number, category, subcategory, and description.
@@ -51,5 +51,5 @@ For a **detailed explanation of the code, logic, and implementation**, visit my 
 [Syed Hassan Ali Bukhari](https://hassanbukhari.is-a.dev/)
 
 ## License
-This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details..
+This project is licensed under the [MIT License](./LICENSE).
 
