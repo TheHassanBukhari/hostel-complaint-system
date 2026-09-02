@@ -1,55 +1,52 @@
-# Hostel Complaint System (1st Semester Python Project)
-This repository contains my **first semester Python project**: a **Hostel Complaint Management System**. It is a **console-based application** that allows hostel residents to **submit complaints with categories and details**, while administrators can **review, track, and resolve complaints**. The project demonstrates Python fundamentals such as **functions, file handling, and simple data structures**.
+# Hostel Complaint System
+
+This repository contains my first semester Python project, a Hostel Complaint Management System. It's a console based application that lets hostel residents submit complaints with categories and details, while administrators review, track, and resolve them. The project demonstrates Python fundamentals such as functions, file handling, and simple data structures.
+
+**Project Type:** University Project (Solo) <br>
+**Course:** ICT, 1st Semester, COMSATS University Islamabad
 
 **Portfolio:** [hassanbukhari.is-a.dev](https://hassanbukhari.is-a.dev/) <br>
 **LinkedIn:** [Syed Hassan Ali Bukhari](https://www.linkedin.com/in/syedhassanalibukhari/)
 
 ## Features
-* **Submit Complaints**: Students can submit complaints with details like name, room number, category, subcategory, and description.
-* **Complaint Categories**: Organized complaint system with categories such as Food, Water, Electricity, Internet, Maintenance, and Others.
-* **Automatic Serial Numbers**: Each complaint is assigned a unique serial number.
-* **Persistent Storage**: Complaints are stored as text files in a structured `Data/complaints` folder.
-* **Admin Panel**: Admin can log in (password protected) to:
-  * View unresolved complaints
-  * View detailed complaint files
-  * Mark complaints as resolved
-  * View the list of resolved complaints
-* **File-based Tracking**: Uses `complaint_index.txt` for current complaints and `resolved_complaints.txt` for resolved ones.
----
+
+- Submit complaints with name, room number, category, subcategory, and description
+- Complaint categories: Food, Water, Electricity, Internet, Maintenance, and Others
+- Automatic serial numbers for each complaint
+- Persistent storage as text files in a structured `Data/complaints` folder
+- Admin panel (password protected): view unresolved complaints, view detailed complaint files, mark complaints resolved, view resolved list
+- File based tracking using `complaint_index.txt` and `resolved_complaints.txt`
+
 ## How to Run
-1. **Clone the repository:**
+
 ```bash
 git clone https://github.com/TheHassanBukhari/hostel-complaint-system.git
-```
-2. **Navigate to the project folder:**
-```bash
 cd hostel-complaint-system
-```
-3. **Run the program:**
-```bash
 python Project.py
 ```
+
 > The program will automatically create a `Data` folder and required text files on the first run.
 
 ## Learning Outcomes
-* Implemented **functions** for modular programming
-* Practiced **file handling** for complaint submission and storage
-* Learned how to create a **basic admin system** with password protection
-* Understood the use of **data persistence** using plain text files
-* Built a **menu-driven console application** in Python
+
+- Functions for modular programming
+- File handling for complaint submission and storage
+- Basic admin system with password protection
+- Data persistence using plain text files
+- Menu-driven console application in Python
 
 ## Admin Access
-* Admin Panel is protected with a password.
-* **Default password**: `admin123`
+
+Admin panel is protected with a password. Default password: `admin123`
 
 ## Additional Resources
-For a **detailed explanation of the code, logic, and implementation**, visit my documentation:
+
 [Full Project Explanation](https://thehassanbukhari.github.io/hostel-complaint-system/)
 
-
 ## Author
+
 [Syed Hassan Ali Bukhari](https://hassanbukhari.is-a.dev/)
 
 ## License
-This project is licensed under the [MIT License](./LICENSE).
 
+This project is licensed under the [MIT License](./LICENSE).
